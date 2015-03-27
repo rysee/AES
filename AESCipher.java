@@ -55,7 +55,8 @@ public class AESCipher extends CipherSpi {
         /**
          * First method to be implemented. Should take into account
          * the data in the buffer, size of input data (inputLen)
-         * and needs to calculate any padding (check if PKCS5 is set?)
+         * and needs to calculate any padding.
+         * Check padding via boolean do_pad
          */
         
         int length = inputLen;
