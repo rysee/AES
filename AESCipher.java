@@ -53,8 +53,17 @@ public class AESCipher extends CipherSpi {
     }
     protected int engineGetOutputSize(int inputLen) {
         /**
-         * Implement me.
+         * First method to be implemented. Should take into account
+         * the data in the buffer, size of input data (inputLen)
+         * and needs to calculate any padding (check if PKCS5 is set?)
          */
+        
+        int length = inputLen;
+        
+        // Where do we get how much is in the buffer?
+        
+        return length;
+        
     }
     protected byte[] engineGetIV() {
         byte[] retiv = new byte[16];
