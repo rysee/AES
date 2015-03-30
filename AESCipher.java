@@ -61,8 +61,21 @@ public class AESCipher extends CipherSpi {
         
         int length = inputLen;
         
-        // Where do we get how much is in the buffer?
+        // Where do we get how much is in the buffer? No idea yet
         
+        if do_pad {
+            // If the last block is full, account for extra row of padding
+            // Integer division will round down in all cases except
+            // where it divides cleanly. In both cases i think
+            // this will calculate how many bytes will be used.
+            // Should just need to take into account whats in the
+            // buffer
+            length = (( inputLen / engineGetBlockSize() ) + 1) * engineGetBlockSize();
+        }
+        else {
+            // No padding being used. Will need to take into
+            // account the buffer. 
+        }
         return length;
         
     }
@@ -104,8 +117,13 @@ public class AESCipher extends CipherSpi {
     protected void engineInit(int opmode, Key key, AlgorithmParameterSpec params, SecureRandom random)
       throws InvalidKeyException, InvalidAlgorithmParameterException {
         /**
-         * Implement me.
+         * Should reset the internal state. Check and make sure the
+         * key is a secret key. Check length of key. Make sure IV is
+         * an instance of IvParaSpec. If CBC, gen IV.
+         * 
          */
+        
+        
     }
     private int allocateSize(int inputLen) {
         /**
@@ -125,8 +143,21 @@ public class AESCipher extends CipherSpi {
     protected int engineUpdate(byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset)
       throws ShortBufferException {
         /**
-         * Implement me.
+         * Called with more info to add to the buffer.
+         * Add data to the buffer, if a full block is formed,
+         * process it. Leftover data stays in the buff.
+         * Generated output stored in output array. 
          */
+        
+        if outputOffset + inputLen > output.lenth {
+            throw ShortBufferException;
+        }
+        else
+        {
+               
+        }
+        
+        
     }
     protected byte[] engineDoFinal(byte[] input, int inputOffset, int inputLen)
       throws IllegalBlockSizeException, BadPaddingException {
